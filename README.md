@@ -1,5 +1,6 @@
 # evil-args
-Motions and text objects for delimited arguments in [Evil](https://gitorious.org/evil/), the extensible vi layer for Emacs.
+Motions and text objects for delimited arguments in
+[Evil](https://gitorious.org/evil/), the extensible vi layer for Emacs.
 
 ## Setup
 Get it with:
@@ -65,7 +66,8 @@ or
 
 ###`evil-jump-out-args`
 
-Moves to the beginning of the first object outside of the current argument context.
+Moves to the beginning of the first object outside of the current argument
+context.
 
 For example, pressing `evil-jump-out-args` yields:
 
@@ -88,3 +90,18 @@ Successive presses of `evil-jump-out-args` yield:
         statement1;
         statement2;
     }
+    
+##Customization
+
+Currently, `evil-args` uses `,` and `;` as delimiters. The definition of
+delimiters and matching pairs can be customized by changing the variables
+`evil-args-openers`, `evil-args-closers`, and `evil-args-delimiters`.
+
+For example, setting `evil-args-delimiters` to `(" ")` would allow for
+evil-args features in Lisp lists; repeated presses of `evil-forward-arg`
+would yield:
+
+    (fun|ction a b)
+    (function |a b)
+    (function a |b)
+    (function a b|)
