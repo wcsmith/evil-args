@@ -37,16 +37,19 @@
 ;;     (add-to-list 'load-path "path/to/evil-args")
 ;;     (require 'evil-args)
 ;;
-;; Add the following keybindings with keys of your choice:
+;; evil-arg text objects have been bound to the 'a' key by default. To bind them
+;; to another key 'k', add:
+;;
+;;    (define-key evil-inner-text-objects-map "k" 'evil-inner-arg)
+;;    (define-key evil-outer-text-objects-map "k" 'evil-outer-arg)
+;;
+;; To enable evil-arg motions, add the following keybindings:
 ;;
 ;;    (define-key evil-normal-state-map "L" 'evil-forward-arg)
 ;;    (define-key evil-normal-state-map "H" 'evil-backward-arg)
 ;;
 ;;    (define-key evil-motion-state-map "L" 'evil-forward-arg)
 ;;    (define-key evil-motion-state-map "H" 'evil-backward-arg)
-;;
-;;    (define-key evil-inner-text-objects-map "a" 'evil-inner-arg)
-;;    (define-key evil-outer-text-objects-map "a" 'evil-outer-arg)
 ;;
 ;;    (define-key evil-normal-state-map "K" 'evil-jump-out-args)
 ;;
@@ -217,5 +220,8 @@
 	    (setq begin (point))))
 	(if begin (goto-char begin)))
       (setq count (- count 1)))))
+
+(define-key evil-inner-text-objects-map "a" 'evil-inner-arg)
+(define-key evil-outer-text-objects-map "a" 'evil-outer-arg)
 
 (provide 'evil-args)
