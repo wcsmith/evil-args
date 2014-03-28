@@ -228,6 +228,8 @@
      (autoload 'evil-forward-arg "evil-args" nil t)
      (autoload 'evil-backward-arg "evil-args" nil t)
      (autoload 'evil-jump-out-args "evil-args" nil t)
+     (autoload 'evil-inner-arg "evil-args" nil t)
+     (autoload 'evil-outer-arg "evil-args" nil t)
      (define-key evil-inner-text-objects-map "a" 'evil-inner-arg)
      (define-key evil-outer-text-objects-map "a" 'evil-outer-arg)))
 
