@@ -37,7 +37,7 @@
 ;;     (add-to-list 'load-path "path/to/evil-args")
 ;;     (require 'evil-args)
 ;;
-;; Optionally, add the following keybindings with keys of your choice:
+;; Add the following keybindings with keys of your choice:
 ;;
 ;;    (define-key evil-normal-state-map "L" 'evil-forward-arg)
 ;;    (define-key evil-normal-state-map "H" 'evil-backward-arg)
