@@ -1,13 +1,14 @@
 ;;; evil-args.el --- Motions and text objects for delimited arguments in Evil.
 
-;; Author:
-;;     Connor Smith
+;; Copyright (c) 2014 Connor Smith
+
+;; Author: Connor Smith <wconnorsmith@gmail.com>
+;; Version: 1.0
+;; Keywords: evil, vim
 
 ;; This file is NOT part of GNU Emacs.
 
 ;; The MIT License (MIT)
-
-;; Copyright (c) 2014 Connor Smith
 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
@@ -27,8 +28,30 @@
 ;; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 ;; SOFTWARE.
 
-;; Commentary:
-;;     See README.md for usage.
+;;; Commentary:
+
+;; This package provides motions and text objects for delimited agruments in
+;; Evil, the extensible vi layer. To activate it, add the following to your
+;; .emacs:
+;;
+;;     (add-to-list 'load-path "path/to/evil-args")
+;;     (require 'evil-args)
+;;
+;; Optionally, add the following keybindings with keys of your choice:
+;;
+;;    (define-key evil-normal-state-map "L" 'evil-forward-arg)
+;;    (define-key evil-normal-state-map "H" 'evil-backward-arg)
+;;
+;;    (define-key evil-motion-state-map "L" 'evil-forward-arg)
+;;    (define-key evil-motion-state-map "H" 'evil-backward-arg)
+;;
+;;    (define-key evil-inner-text-objects-map "a" 'evil-inner-arg)
+;;    (define-key evil-outer-text-objects-map "a" 'evil-outer-arg)
+;;
+;;    (define-key evil-normal-state-map "K" 'evil-jump-out-args)
+;;
+;; See README.md for more details.
+
 
 (require 'evil)
 
