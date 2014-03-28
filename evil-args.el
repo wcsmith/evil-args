@@ -59,7 +59,8 @@
 (require 'evil)
 
 (defgroup evil-args nil
-  "Motions and text objects for delimited arguments in Evil.")
+  "Motions and text objects for delimited arguments in Evil."
+  :group 'evil)
 
 (defcustom evil-args-openers '("(" "{" "[")
   "Argument openers"
