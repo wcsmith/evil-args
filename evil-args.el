@@ -222,7 +222,13 @@
 	(if begin (goto-char begin)))
       (setq count (- count 1)))))
 
-(define-key evil-inner-text-objects-map "a" 'evil-inner-arg)
-(define-key evil-outer-text-objects-map "a" 'evil-outer-arg)
+;;;###autoload
+(eval-after-load 'evil
+  (autoload 'evil-forward-arg "evil-args" nil t)
+  (autoload 'evil-backward-arg "evil-args" nil t)
+  (autoload 'evil-jump-out-args "evil-args" nil t)
+  (define-key evil-inner-text-objects-map "a" 'evil-inner-arg)
+  (define-key evil-outer-text-objects-map "a" 'evil-outer-arg))
 
 (provide 'evil-args)
+;;; evil-args.el ends here
