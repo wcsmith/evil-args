@@ -12,13 +12,13 @@ Add the following to your `.emacs`:
     (add-to-list 'load-path "path/to/evil-args")
     (require 'evil-args)
 
-`evil-arg` text objects have been bound to the `a` key by default. To bind them
+`evil-args` text objects have been bound to the `a` key by default. To bind them
 to another key `k`, add:
 
     (define-key evil-inner-text-objects-map "k" 'evil-inner-arg)
     (define-key evil-outer-text-objects-map "k" 'evil-outer-arg)
 
-To enable evil-args motions, add the following keybindings:
+To enable `evil-args` motions, add the following keybindings:
 
     (define-key evil-normal-state-map "L" 'evil-forward-arg)
     (define-key evil-normal-state-map "H" 'evil-backward-arg)
@@ -104,7 +104,7 @@ delimiters and matching pairs can be customized by changing the variables
 `evil-args-openers`, `evil-args-closers`, and `evil-args-delimiters`.
 
 For example, setting `evil-args-delimiters` to `(" ")` would allow for
-evil-args features in Lisp lists; repeated presses of `evil-forward-arg`
+`evil-args` features in Lisp lists; repeated presses of `evil-forward-arg`
 would yield:
 
     (fun|ction a b)

@@ -37,8 +37,8 @@
 ;;     (add-to-list 'load-path "path/to/evil-args")
 ;;     (require 'evil-args)
 ;;
-;; evil-arg text objects have been bound to the 'a' key by default. To bind them
-;; to another key 'k', add:
+;; evil-args text objects have been bound to the 'a' key by default. To bind
+;; them to another key 'k', add:
 ;;
 ;;    (define-key evil-inner-text-objects-map "k" 'evil-inner-arg)
 ;;    (define-key evil-outer-text-objects-map "k" 'evil-outer-arg)
