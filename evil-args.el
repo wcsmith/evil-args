@@ -215,7 +215,7 @@
 	(save-excursion
 	  (while (< begin 0)
 	    (if (not (re-search-backward all-regexp nil t))
-		(setq begin (- (point-at-bol)) 1)
+		(setq begin (- (point-at-bol) 1))
 	      (while (looking-at-p closers-regexp)
 		(evil-jump-item)
 		(backward-char))
