@@ -3,8 +3,10 @@
 ;; Copyright (c) 2014 Connor Smith
 
 ;; Author: Connor Smith <wconnorsmith@gmail.com>
+;; URL: http://github.com/wcsmith/evil-args
 ;; Version: 1.0
-;; Keywords: evil, vim
+;; Keywords: evil, vim-emulation
+;; Package-Requires ((evil "1.0.8"))
 
 ;; This file is NOT part of GNU Emacs.
 
@@ -30,28 +32,25 @@
 
 ;;; Commentary:
 
-;; This package provides motions and text objects for delimited agruments in
+;; This package provides motions and text objects for delimited arguments in
 ;; Evil, the extensible vi layer. To activate it, add the following to your
 ;; .emacs:
 ;;
 ;;     (add-to-list 'load-path "path/to/evil-args")
 ;;     (require 'evil-args)
 ;;
-;; evil-args text objects have been bound to the 'a' key by default. To bind
-;; them to another key 'k', add:
+;;     ;; bind evil-args text objects
+;;     (define-key evil-inner-text-objects-map "a" 'evil-inner-arg)
+;;     (define-key evil-outer-text-objects-map "a" 'evil-outer-arg)
 ;;
-;;    (define-key evil-inner-text-objects-map "k" 'evil-inner-arg)
-;;    (define-key evil-outer-text-objects-map "k" 'evil-outer-arg)
+;;     ;; bind evil-forward/backward-args
+;;     (define-key evil-normal-state-map "L" 'evil-forward-arg)
+;;     (define-key evil-normal-state-map "H" 'evil-backward-arg)
+;;     (define-key evil-motion-state-map "L" 'evil-forward-arg)
+;;     (define-key evil-motion-state-map "H" 'evil-backward-arg)
 ;;
-;; To enable evil-arg motions, add the following keybindings:
-;;
-;;    (define-key evil-normal-state-map "L" 'evil-forward-arg)
-;;    (define-key evil-normal-state-map "H" 'evil-backward-arg)
-;;
-;;    (define-key evil-motion-state-map "L" 'evil-forward-arg)
-;;    (define-key evil-motion-state-map "H" 'evil-backward-arg)
-;;
-;;    (define-key evil-normal-state-map "K" 'evil-jump-out-args)
+;;     ;; bind evil-jump-out-args
+;;     (define-key evil-normal-state-map "K" 'evil-jump-out-args)
 ;;
 ;; See README.md for more details.
 
@@ -146,13 +145,17 @@
     (evil-next-line)
     (evil-first-non-blank)))
 
+;;;###autoload (autoload 'evil-backward-arg "evil-args")
 (evil-define-motion evil-backward-arg (count)
+  "Move the cursor backward COUNT arguments."
   (let ((delimiters-regexp (regexp-opt evil-args-delimiters)))
     (evil-args--backward-arg-no-skip
      (+ (if (looking-back (concat delimiters-regexp
 				  "[\t\n ]*")) 1 0) (or count 1)))))
 
+;;;###autoload (autoload 'evil-forward-arg "evil-args")
 (evil-define-motion evil-forward-arg (count)
+  "Move the cursor forward COUNT arguments."
   (let ((closers-regexp (regexp-opt evil-args-closers)))
   (evil-args--forward-delimiter (or count 1))
   (when (not (looking-at-p closers-regexp))
@@ -163,12 +166,14 @@
       (evil-next-line)
       (evil-first-non-blank)))))
 
+;;;###autoload (autoload 'evil-inner-arg "evil-args")
 (evil-define-text-object evil-inner-arg (count &optional beg end type)
   "Select inner delimited argument."
   (let ((begin (save-excursion (evil-args--backward-arg-no-skip 1) (point)))
         (end (save-excursion (evil-args--forward-delimiter) (point))))
     (evil-range begin end)))
 
+;;;###autoload (autoload 'evil-outer-arg "evil-args")
 (evil-define-text-object evil-outer-arg (count &optional beg end type)
   "Select a delimited argument."
   (let ((openers-regexp (regexp-opt evil-args-openers))
@@ -191,7 +196,9 @@
         (setq begin (point))))
      (evil-range begin end)))
 
+;;;###autoload (autoload 'evil-jump-out-args "evil-args")
 (evil-define-motion evil-jump-out-args (count)
+  "Move cursor out of the nearest enclosing matching pairs."
   (setq count (or count 1))
   (let ((openers-regexp (regexp-opt evil-args-openers))
 	(closers-regexp (regexp-opt evil-args-closers))
@@ -221,17 +228,6 @@
 	    (setq begin (point))))
 	(if begin (goto-char begin)))
       (setq count (- count 1)))))
-
-;;;###autoload
-(eval-after-load 'evil
-  '(progn
-     (autoload 'evil-forward-arg "evil-args" nil t)
-     (autoload 'evil-backward-arg "evil-args" nil t)
-     (autoload 'evil-jump-out-args "evil-args" nil t)
-     (autoload 'evil-inner-arg "evil-args" nil t)
-     (autoload 'evil-outer-arg "evil-args" nil t)
-     (define-key evil-inner-text-objects-map "a" 'evil-inner-arg)
-     (define-key evil-outer-text-objects-map "a" 'evil-outer-arg)))
 
 (provide 'evil-args)
 ;;; evil-args.el ends here

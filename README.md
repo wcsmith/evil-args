@@ -12,20 +12,17 @@ Add the following to your `.emacs`:
     (add-to-list 'load-path "path/to/evil-args")
     (require 'evil-args)
 
-`evil-args` text objects have been bound to the `a` key by default. To bind them
-to another key `k`, add:
+    ;; bind evil-args text objects
+    (define-key evil-inner-text-objects-map "a" 'evil-inner-arg)
+    (define-key evil-outer-text-objects-map "a" 'evil-outer-arg)
 
-    (define-key evil-inner-text-objects-map "k" 'evil-inner-arg)
-    (define-key evil-outer-text-objects-map "k" 'evil-outer-arg)
-
-To enable `evil-args` motions, add the following keybindings:
-
+    ;; bind evil-forward/backward-args
     (define-key evil-normal-state-map "L" 'evil-forward-arg)
     (define-key evil-normal-state-map "H" 'evil-backward-arg)
-
     (define-key evil-motion-state-map "L" 'evil-forward-arg)
     (define-key evil-motion-state-map "H" 'evil-backward-arg)
 
+    ;; bind evil-jump-out-args
     (define-key evil-normal-state-map "K" 'evil-jump-out-args)
 
 ##Functionality
