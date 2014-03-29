@@ -145,17 +145,19 @@
     (evil-next-line)
     (evil-first-non-blank)))
 
-;;;###autoload (autoload 'evil-backward-arg "evil-args")
-(evil-define-motion evil-backward-arg (count)
+;;;###autoload
+(defun evil-backward-arg (count)
   "Move the cursor backward COUNT arguments."
+  (interactive "p")
   (let ((delimiters-regexp (regexp-opt evil-args-delimiters)))
     (evil-args--backward-arg-no-skip
      (+ (if (looking-back (concat delimiters-regexp
 				  "[\t\n ]*")) 1 0) (or count 1)))))
 
-;;;###autoload (autoload 'evil-forward-arg "evil-args")
-(evil-define-motion evil-forward-arg (count)
+;;;###autoload
+(defun evil-forward-arg (count)
   "Move the cursor forward COUNT arguments."
+  (interactive "p")
   (let ((closers-regexp (regexp-opt evil-args-closers)))
   (evil-args--forward-delimiter (or count 1))
   (when (not (looking-at-p closers-regexp))
@@ -166,14 +168,14 @@
       (evil-next-line)
       (evil-first-non-blank)))))
 
-;;;###autoload (autoload 'evil-inner-arg "evil-args")
+;;;###autoload
 (evil-define-text-object evil-inner-arg (count &optional beg end type)
   "Select inner delimited argument."
   (let ((begin (save-excursion (evil-args--backward-arg-no-skip 1) (point)))
         (end (save-excursion (evil-args--forward-delimiter) (point))))
     (evil-range begin end)))
 
-;;;###autoload (autoload 'evil-outer-arg "evil-args")
+;;;###autoload
 (evil-define-text-object evil-outer-arg (count &optional beg end type)
   "Select a delimited argument."
   (let ((openers-regexp (regexp-opt evil-args-openers))
@@ -196,9 +198,10 @@
         (setq begin (point))))
      (evil-range begin end)))
 
-;;;###autoload (autoload 'evil-jump-out-args "evil-args")
-(evil-define-motion evil-jump-out-args (count)
-  "Move cursor out of the nearest enclosing matching pairs."
+;;;###autoload
+(defun evil-jump-out-args (count)
+  "Move the cursor out of the nearest enclosing matching pairs."
+  (interactive "p")
   (setq count (or count 1))
   (let ((openers-regexp (regexp-opt evil-args-openers))
 	(closers-regexp (regexp-opt evil-args-closers))
@@ -228,6 +231,11 @@
 	    (setq begin (point))))
 	(if begin (goto-char begin)))
       (setq count (- count 1)))))
+
+;; declare evil motions
+(evil-declare-motion 'evil-forward-arg)
+(evil-declare-motion 'evil-backward-arg)
+(evil-declare-motion 'evil-jump-out-args)
 
 (provide 'evil-args)
 ;;; evil-args.el ends here
