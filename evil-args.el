@@ -168,14 +168,14 @@
       (evil-next-line)
       (evil-first-non-blank)))))
 
-;;;###autoload
+;;;###autoload (autoload 'evil-inner-arg "evil-args")
 (evil-define-text-object evil-inner-arg (count &optional beg end type)
   "Select inner delimited argument."
   (let ((begin (save-excursion (evil-args--backward-arg-no-skip 1) (point)))
         (end (save-excursion (evil-args--forward-delimiter) (point))))
     (evil-range begin end)))
 
-;;;###autoload
+;;;###autoload (autoload 'evil-outer-arg "evil-args")
 (evil-define-text-object evil-outer-arg (count &optional beg end type)
   "Select a delimited argument."
   (let ((openers-regexp (regexp-opt evil-args-openers))
