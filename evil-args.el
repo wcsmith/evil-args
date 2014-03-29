@@ -6,7 +6,7 @@
 ;; URL: http://github.com/wcsmith/evil-args
 ;; Version: 1.0
 ;; Keywords: evil, vim-emulation
-;; Package-Requires ((evil "1.0.8"))
+;; Package-Requires: ((evil "1.0.8"))
 
 ;; This file is NOT part of GNU Emacs.
 
