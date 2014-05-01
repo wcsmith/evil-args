@@ -3,12 +3,23 @@ Motions and text objects for delimited arguments in
 [Evil](https://gitorious.org/evil/), the extensible vi layer for Emacs.
 
 ## Setup
-Get it with:
+### Installing from MELPA
+If you already use MELPA, all you have to do is:
+
+    M-x package-install RET evil-args RET
+
+For help installing and using MELPA, see [these instructions](
+melpa.milkbox.net/#/getting-started).
+
+### Installing from Github
+Install `evil-args` manually from Github with:
 
     git clone https://github.com/wcsmith/evil-args.git
     
-Add the following to your `.emacs`:
+### Configuration
+After installing `evil-args`, add the following to your `.emacs`:
 
+    ;; locate and load the package
     (add-to-list 'load-path "path/to/evil-args")
     (require 'evil-args)
 
@@ -26,25 +37,7 @@ Add the following to your `.emacs`:
     (define-key evil-normal-state-map "K" 'evil-jump-out-args)
 
 ##Functionality
-###`evil-forward-arg`/`evil-backward-arg`
-Move the curser to the next/previous argument.
-
-For example, successive presses of `evil-forward-arg` yield:
-
-    function(ar|g1, arg2, arg3)
-    function(arg1, |arg2, arg3)
-    function(arg1, arg2, |arg3)
-    function(arg1, arg2, arg3|)
-
-Successive presses of `evil-backward-arg` yield:
-
-    function(arg1, arg2, ar|g3)
-    function(arg1, arg2, |arg3)
-    function(arg1, |arg2, arg3)
-    function(|arg1, arg2, arg3)
-
 ###`evil-inner-arg`/`evil-outer-arg`
-
 Select an inner/outer argument text object.
 
 For example, `cia` transforms:
@@ -67,8 +60,24 @@ or
     function(arg1, ar|g2, arg3)
     function(arg1, |arg3)
 
-###`evil-jump-out-args`
+###`evil-forward-arg`/`evil-backward-arg`
+Move the curser to the next/previous argument.
 
+For example, successive presses of `evil-forward-arg` yield:
+
+    function(ar|g1, arg2, arg3)
+    function(arg1, |arg2, arg3)
+    function(arg1, arg2, |arg3)
+    function(arg1, arg2, arg3|)
+
+Successive presses of `evil-backward-arg` yield:
+
+    function(arg1, arg2, ar|g3)
+    function(arg1, arg2, |arg3)
+    function(arg1, |arg2, arg3)
+    function(|arg1, arg2, arg3)
+
+###`evil-jump-out-args`
 Moves to the beginning of the first object outside of the current argument
 context.
 
@@ -95,7 +104,6 @@ Successive presses of `evil-jump-out-args` yield:
     }
     
 ##Customization
-
 Currently, `evil-args` uses `,` and `;` as delimiters. The definition of
 delimiters and matching pairs can be customized by changing the variables
 `evil-args-openers`, `evil-args-closers`, and `evil-args-delimiters`.
