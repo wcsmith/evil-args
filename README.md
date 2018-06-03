@@ -36,8 +36,9 @@ After installing `evil-args`, add the following to your `.emacs`:
     ;; bind evil-jump-out-args
     (define-key evil-normal-state-map "K" 'evil-jump-out-args)
 
-##Functionality
-###`evil-inner-arg`/`evil-outer-arg`
+## Functionality
+
+### `evil-inner-arg`/`evil-outer-arg`
 Select an inner/outer argument text object.
 
 For example, `cia` transforms:
@@ -60,7 +61,8 @@ or
     function(arg1, ar|g2, arg3)
     function(arg1, |arg3)
 
-###`evil-forward-arg`/`evil-backward-arg`
+### `evil-forward-arg`/`evil-backward-arg`
+
 Move the curser to the next/previous argument.
 
 For example, successive presses of `evil-forward-arg` yield:
@@ -77,7 +79,7 @@ Successive presses of `evil-backward-arg` yield:
     function(arg1, |arg2, arg3)
     function(|arg1, arg2, arg3)
 
-###`evil-jump-out-args`
+### `evil-jump-out-args`
 Moves to the beginning of the first object outside of the current argument
 context.
 
@@ -103,7 +105,7 @@ Successive presses of `evil-jump-out-args` yield:
         statement2;
     }
     
-##Customization
+## Customization
 Currently, `evil-args` uses `,` and `;` as delimiters. The definition of
 delimiters and matching pairs can be customized by changing the variables
 `evil-args-openers`, `evil-args-closers`, and `evil-args-delimiters`.
