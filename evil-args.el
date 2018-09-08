@@ -172,7 +172,7 @@
 (evil-define-text-object evil-inner-arg (count &optional beg end type)
   "Select inner delimited argument."
   (let ((begin (save-excursion (evil-args--backward-arg-no-skip 1) (point)))
-        (end (save-excursion (evil-args--forward-delimiter) (point))))
+        (end (save-excursion (evil-args--forward-delimiter count) (point))))
     (evil-range begin end)))
 
 ;;;###autoload (autoload 'evil-outer-arg "evil-args")
@@ -183,7 +183,7 @@
         (end-on-closer nil)
         (end nil))
     (save-excursion
-      (evil-args--forward-delimiter)
+      (evil-args--forward-delimiter count)
       (if (member (string (char-after)) evil-args-delimiters)
           (evil-forward-arg 1)
         (setq end-on-closer t))
