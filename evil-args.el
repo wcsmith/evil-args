@@ -1,4 +1,4 @@
-;;; evil-args.el --- Motions and text objects for delimited arguments in Evil.
+;;; evil-args.el --- Motions and text objects for delimited arguments in Evil. -*- lexical-binding: t; -*-
 
 ;; Copyright (c) 2014 Connor Smith
 
